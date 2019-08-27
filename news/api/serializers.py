@@ -29,6 +29,15 @@ class ArticleSerializer(serializers.ModelSerializer):
         return value
 
 
+class JournalistSerializer(serializers.ModelSerializer):
+    articles = serializers.HyperlinkedRelatedField(many=True,
+                                                    read_only=True,
+                                                    view_name="article-detail")
+    # articles = serializer.ArticleSerializer(many=True, read_only=True)
+    class Meta:
+        model = models.Journalist
+        fields = "__all__"
+
 # class ArticleSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
 #     author = serializers.CharField()

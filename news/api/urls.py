@@ -9,4 +9,9 @@ urlpatterns = [
     path('articles/<int:pk>/',
         views.ArticleDetailView.as_view(),
         name="article-detail"),
+
+    path('journalists/',
+        views.JournalistListCreateAPIView.as_view(),
+        name='journalist-list'),
+
 ]

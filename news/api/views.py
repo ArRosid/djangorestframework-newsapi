@@ -46,6 +46,22 @@ class ArticleDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class JournalistListCreateAPIView(APIView):
+
+    def get(self, request):
+        journalist = models.Journalist.objects.all()
+        serializer = serializers.JournalistSerializer(journalist,
+                                                    many=True,
+                                                    context={'request':request})
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = serializers.JournalistSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 # @api_view(['GET','POST'])
 # def article_list_create_api_view(request):
     
