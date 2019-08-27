@@ -14,4 +14,8 @@ urlpatterns = [
         views.JournalistListCreateAPIView.as_view(),
         name='journalist-list'),
 
+    path('journalists/<int:pk>/',
+        views.JournalistDetaliAPIView.as_view(),
+        name="journalist-detail"),
+
 ]
