@@ -27,3 +27,13 @@ class ArticleSerializer(serializers.Serializer):
         instance.active = validated_data.get('active', instance.active)
         instance.save()
         return instance        
+
+    def validate(self, data):
+        if data['title'] == data['description']:
+            raise serializers.ValidationError("Title and description must different")
+        return data
+    
+    def validate_title(self, value):
+        if len(value) < 10:
+            raise serializers.ValidationError("The title must be at least 10 character")
+        return value
